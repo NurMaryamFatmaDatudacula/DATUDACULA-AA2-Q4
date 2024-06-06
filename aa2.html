@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+<title>Sign-Up</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #244a75;
+    color: #333;
+  }
+  form {
+    max-width: 500px;
+    margin: 20px auto 0; 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  input, select, textarea {
+    width: calc(100% - 24px); 
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc; 
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  }
+  input.error, select.error, textarea.error {
+    border-color: #f44336; 
+  }
+  input.success, select.success, textarea.success {
+    border-color: #4caf50; 
+  }
+  button {
+    display: block;
+    width: calc(50% - 5px); 
+    padding: 10px;
+    margin-top: 10px; 
+    background-color: #ff8b94; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #ff6b7d; 
+  }
+  .output {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<form id="signupForm" onsubmit="return handleSubmit()">
+  <fieldset>
+    <legend>Sign-Up Form</legend>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required onblur="validateInput(this)" onfocus="clearError(this)">
+    
+    <label for="username">Preferred Username:</label>
+    <input type="text" id="username" required onblur="validateInput(this)" onfocus="clearError(this)">
+    
+    <label for="gender">Gender:</label>
+    <select id="gender" required onblur="validateInput(this)" onfocus="clearError(this)">
+      <option value="" disabled selected>Select gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="prefer not to mention">Prefer not to mention</option>
+    </select>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" required onblur="validateInput(this)" onfocus="clearError(this)">
+    
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" required onblur="validateInput(this)" onfocus="clearError(this)">
+    
+    <label for="address">Address:</label>
+    <textarea id="address" rows="3" required onblur="validateInput(this)" onfocus="clearError(this)"></textarea>
+    
+    <label for="interest">Your Interests:</label>
+    <textarea id="interest" rows="3" required onblur="validateInput(this)" onfocus="clearError(this)"></textarea>
+  </fieldset>
+  
+  <button type="submit" fdprocessedid="yn4ygv">Submit</button>
+  <button type="reset" onclick="clearOutput()" fdprocessedid="0cj579">Reset</button>
+</form>
+
+<div class="output" id="output"></div>
+
+<script>
+  function validateInput(input) {
+    if (!input.value) {
+      input.classList.remove('success');
+      input.classList.add('error');
+    } else {
+      input.classList.remove('error');
+      input.classList.add('success');
+    }
+  }
+
+  function clearError(input) {
+    input.classList.remove('error', 'success')
+  }
+  
+  function handleSubmit() {
+    event.preventDefault();
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = `
+      <h2>Sign-Up Information:</h2>
+      <p><strong>Name:</strong> ${document.getElementById('name').value}</p>
+      <p><strong>Preferred Username:</strong> ${document.getElementById('username').value}</p>
+      <p><strong>Gender:</strong> ${document.getElementById('gender').value}</p>
+      <p><strong>Email Address:</strong> ${document.getElementById('email').value}</p>
+      <p><strong>Address:</strong> ${document.getElementById('address').value}</p>
+      <p><strong>Interests:</strong> ${document.getElementById('interest').value}</p>
+    `;
+    return false;
+  }
+  
+  function clearError() {
+    document.getElementById('output').innerHTML = '';
+  }
+</script>
+
+</body>
+</html>
